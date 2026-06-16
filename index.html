@@ -2,38 +2,43 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Agua">
   <meta name="theme-color" content="#0a0f1e">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%230a0f1e'/%3E%3Cg transform='translate(256,256)'%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='%233b9eff' opacity='.2'/%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='none' stroke='%233b9eff' stroke-width='18'/%3E%3Crect x='-38' y='-140' width='76' height='30' rx='8' fill='%233b9eff' opacity='.6'/%3E%3Crect x='-24' y='-170' width='48' height='36' rx='8' fill='%233b9eff' opacity='.4'/%3E%3Cpath d='M-105,60 Q-105,140 0,140 Q105,140 105,60' fill='%233b9eff' opacity='.45'/%3E%3Ccircle cx='-28' cy='40' r='10' fill='%23ffffff' opacity='.4'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%230a0f1e'/%3E%3Cg transform='translate(256,256)'%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='%233b9eff' opacity='.2'/%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='none' stroke='%233b9eff' stroke-width='18'/%3E%3Crect x='-38' y='-140' width='76' height='30' rx='8' fill='%233b9eff' opacity='.6'/%3E%3Crect x='-24' y='-170' width='48' height='36' rx='8' fill='%233b9eff' opacity='.4'/%3E%3Cpath d='M-105,60 Q-105,140 0,140 Q105,140 105,60' fill='%233b9eff' opacity='.45'/%3E%3Ccircle cx='-28' cy='40' r='10' fill='%23ffffff' opacity='.4'/%3E%3C/g%3E%3C/svg%3E">
   <title>Agua 💧</title>
   <style>
-    :root {
-      --bg:#0a0f1e; --surface:#111827; --surface2:#1a2234;
+    :root{
+      --bg:#0a0f1e;--surface:#111827;--surface2:#1a2234;
       --border:rgba(255,255,255,0.07);
-      --blue:#3b9eff; --blue-dim:rgba(59,158,255,0.12);
-      --green:#22c98a; --green-dim:rgba(34,201,138,0.12);
+      --blue:#3b9eff;--blue-dim:rgba(59,158,255,0.12);
+      --green:#22c98a;--green-dim:rgba(34,201,138,0.12);
       --amber:#f5a623;
-      --text:#f0f4ff; --muted:rgba(240,244,255,0.45); --hint:rgba(240,244,255,0.22);
-      --radius:16px; --radius-sm:10px;
+      --text:#f0f4ff;--muted:rgba(240,244,255,0.45);--hint:rgba(240,244,255,0.22);
+      --radius:16px;--radius-sm:10px;
     }
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-    body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh;padding-bottom:3rem}
+    html{font-size:clamp(15px,4vw,18px)}
+    body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh;padding-bottom:3rem;-webkit-text-size-adjust:100%}
 
-    /* ── ONBOARDING OVERLAY ── */
+    /* ── ONBOARDING ── */
     #onboarding{position:fixed;inset:0;background:var(--bg);z-index:100;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.25rem}
     .ob-wrap{width:100%;max-width:400px;padding-top:1rem}
     .ob-step{display:none}.ob-step.active{display:block}
     .ob-eyebrow{font-size:11px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem}
-    .ob-title{font-size:26px;font-weight:700;letter-spacing:-.5px;line-height:1.15;margin-bottom:.5rem}
-    .ob-sub{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:2rem}
+    .ob-title{font-size:clamp(22px,6vw,28px);font-weight:700;letter-spacing:-.5px;line-height:1.15;margin-bottom:.5rem}
+    .ob-sub{font-size:clamp(13px,3.5vw,15px);color:var(--muted);line-height:1.6;margin-bottom:2rem}
     .ob-fields{display:flex;flex-direction:column;gap:14px;margin-bottom:2rem}
     .ob-field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;letter-spacing:.3px}
     .ob-field input,.ob-field select{width:100%;background:var(--surface);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);color:var(--text);font-size:16px;padding:13px 14px;outline:none;-webkit-appearance:none}
     .ob-field input:focus,.ob-field select:focus{border-color:var(--blue)}
     .ob-field select option{background:#1a2234}
     .ob-sex-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .sex-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);font-size:15px;padding:14px;cursor:pointer;text-align:center;transition:all .15s}
+    .sex-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);font-size:15px;padding:14px;cursor:pointer;text-align:center;transition:all .15s;min-height:48px}
     .sex-btn.sel{background:var(--blue-dim);border-color:rgba(59,158,255,.4);color:var(--blue)}
     .ob-result{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:2rem;text-align:center}
     .ob-result-val{font-size:48px;font-weight:700;letter-spacing:-2px;background:linear-gradient(135deg,var(--blue),#7bc8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -52,10 +57,9 @@
     .custom-bottle-row{display:flex;gap:8px;margin-top:4px}
     .custom-bottle-row input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;padding:12px 14px}
     .custom-bottle-row input::placeholder{color:var(--hint)}
-    .btn-ob{width:100%;background:var(--blue);color:#fff;border:none;border-radius:var(--radius);font-size:17px;font-weight:600;padding:18px;cursor:pointer;letter-spacing:-.2px;transition:opacity .15s}
+    .btn-ob{width:100%;background:var(--blue);color:#fff;border:none;border-radius:var(--radius);font-size:clamp(16px,4.5vw,18px);font-weight:600;padding:clamp(15px,4vw,18px);cursor:pointer;min-height:52px;transition:opacity .15s}
     .btn-ob:active{opacity:.8}
-    .btn-ob:disabled{opacity:.35;cursor:not-allowed}
-    .btn-ob-ghost{width:100%;background:transparent;color:var(--muted);border:none;font-size:14px;padding:12px;cursor:pointer;margin-top:8px}
+    .btn-ob-ghost{width:100%;background:transparent;color:var(--muted);border:none;font-size:14px;padding:12px;cursor:pointer;margin-top:8px;min-height:44px}
     .ob-dots{display:flex;gap:6px;justify-content:center;margin-bottom:2rem}
     .ob-dot{width:6px;height:6px;border-radius:50%;background:var(--surface2)}
     .ob-dot.active{background:var(--blue);width:18px;border-radius:3px}
@@ -64,117 +68,135 @@
     /* ── MAIN APP ── */
     #app{display:none}
     .header{padding:1.5rem 1.25rem 0;display:flex;justify-content:space-between;align-items:flex-start}
-    .header-left h1{font-size:22px;font-weight:600;letter-spacing:-.3px}
-    .header-left p{font-size:13px;color:var(--muted);margin-top:2px;text-transform:capitalize}
-    .btn-settings{background:var(--surface);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .header-left h1{font-size:clamp(20px,5.5vw,24px);font-weight:600;letter-spacing:-.3px}
+    .header-left p{font-size:clamp(12px,3vw,14px);color:var(--muted);margin-top:2px;text-transform:capitalize}
+    .btn-settings{background:var(--surface);border:1px solid var(--border);border-radius:50%;width:40px;height:40px;color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
     .tab-bar{display:flex;gap:8px;padding:1rem 1.25rem 0}
-    .nav-btn{background:var(--surface);border:1px solid var(--border);border-radius:99px;color:var(--text);font-size:13px;padding:6px 14px;cursor:pointer;transition:background .15s}
+    .nav-btn{background:var(--surface);border:1px solid var(--border);border-radius:99px;color:var(--text);font-size:clamp(13px,3.5vw,15px);padding:8px 16px;cursor:pointer;transition:background .15s;min-height:38px}
     .nav-btn.active{background:var(--blue-dim);border-color:rgba(59,158,255,.3);color:var(--blue)}
     .view{display:none;padding:1.25rem}.view.active{display:block}
 
+    /* ── GREETING ── */
+    .greeting-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:1.25rem}
+    .greeting-time{font-size:11px;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+    .greeting-text{font-size:clamp(14px,4vw,16px);color:var(--text);line-height:1.5;font-weight:500}
+    .greeting-sub{font-size:clamp(12px,3vw,13px);color:var(--muted);margin-top:4px;line-height:1.4}
+
     /* ── TODAY ── */
-    .hero{text-align:center;padding:1.25rem 0 .75rem}
-    .hero-val{font-size:60px;font-weight:700;letter-spacing:-3px;line-height:1;background:linear-gradient(135deg,var(--blue),#7bc8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero-unit{font-size:18px;color:var(--muted);display:block;margin-top:4px;-webkit-text-fill-color:var(--muted)}
-    .hero-sub{font-size:13px;color:var(--muted);margin-top:6px}
+    .hero{text-align:center;padding:1rem 0 .75rem}
+    .hero-val{font-size:clamp(50px,13vw,70px);font-weight:700;letter-spacing:-3px;line-height:1;background:linear-gradient(135deg,var(--blue),#7bc8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-unit{font-size:clamp(15px,4vw,19px);color:var(--muted);display:block;margin-top:4px;-webkit-text-fill-color:var(--muted)}
+    .hero-sub{font-size:clamp(13px,3.5vw,15px);color:var(--muted);margin-top:6px}
     .ring-wrap{display:flex;justify-content:center;margin:.5rem 0 1.25rem;position:relative}
     .ring-wrap svg{transform:rotate(-90deg)}
     .ring-bg{fill:none;stroke:var(--surface2);stroke-width:8}
     .ring-fill{fill:none;stroke:var(--blue);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .5s ease,stroke .4s}
     .ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-    .ring-pct{font-size:28px;font-weight:700;letter-spacing:-1px}
-    .ring-sub{font-size:12px;color:var(--muted)}
+    .ring-pct{font-size:clamp(24px,6vw,30px);font-weight:700;letter-spacing:-1px}
+    .ring-sub{font-size:clamp(11px,3vw,13px);color:var(--muted)}
     .stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:1.25rem}
-    .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 10px;text-align:center}
-    .stat-val{font-size:20px;font-weight:600}.stat-lbl{font-size:11px;color:var(--muted);margin-top:2px}
-    .btn-main{width:100%;background:var(--blue);color:#fff;border:none;border-radius:var(--radius);font-size:17px;font-weight:600;padding:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:-.2px;transition:transform .1s,background .2s;position:relative;overflow:hidden;margin-bottom:1rem}
+    .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(10px,3vw,14px) 10px;text-align:center}
+    .stat-val{font-size:clamp(17px,5vw,22px);font-weight:600}
+    .stat-lbl{font-size:clamp(10px,2.5vw,12px);color:var(--muted);margin-top:2px}
+    .btn-main{width:100%;background:var(--blue);color:#fff;border:none;border-radius:var(--radius);font-size:clamp(16px,4.5vw,18px);font-weight:600;padding:clamp(16px,4.5vw,20px);min-height:56px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:-.2px;transition:transform .1s,background .2s;position:relative;overflow:hidden;margin-bottom:1rem}
     .btn-main:active{transform:scale(.98)}
     .btn-main.success{background:var(--green)}
-    .quick-title{font-size:12px;color:var(--hint);text-transform:uppercase;letter-spacing:.5px;margin:.25rem 0 .5rem}
+    .quick-title{font-size:clamp(11px,3vw,13px);color:var(--hint);text-transform:uppercase;letter-spacing:.5px;margin:.25rem 0 .5rem}
     .quick-row{display:flex;gap:8px;margin-bottom:1rem}
-    .btn-quick{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);font-size:13px;padding:10px 6px;cursor:pointer;text-align:center}
+    .btn-quick{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);font-size:clamp(13px,3.5vw,15px);padding:clamp(12px,3.5vw,14px) 6px;cursor:pointer;text-align:center;min-height:48px}
     .btn-quick:active{background:var(--blue-dim);border-color:rgba(59,158,255,.3);color:var(--blue)}
     .custom-row{display:flex;gap:8px;margin-bottom:1.25rem}
-    .custom-row input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;padding:10px 14px}
+    .custom-row input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:clamp(15px,4vw,17px);padding:clamp(11px,3.5vw,14px) 14px;min-height:48px}
     .custom-row input::placeholder{color:var(--hint)}
-    .btn-add-c{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;font-weight:500;padding:10px 18px;cursor:pointer}
+    .btn-add-c{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:clamp(14px,3.5vw,16px);font-weight:500;padding:clamp(11px,3.5vw,14px) 18px;cursor:pointer;min-height:48px}
+    .share-row{display:flex;gap:8px;margin-bottom:1.25rem}
+    .btn-share{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);font-size:clamp(13px,3.5vw,14px);padding:12px 10px;cursor:pointer;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;transition:all .15s}
+    .btn-share:active{background:var(--blue-dim);border-color:rgba(59,158,255,.3);color:var(--blue)}
     .log-section{margin-top:1rem}
-    .log-header{font-size:12px;color:var(--hint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem}
-    .log-item{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)}
+    .log-header{font-size:clamp(11px,3vw,13px);color:var(--hint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem}
+    .log-item{display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,3.5vw,14px) 0;border-bottom:1px solid var(--border)}
     .log-item:last-child{border-bottom:none}
     .log-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);margin-right:12px;flex-shrink:0}
     .log-left{display:flex;align-items:center}
-    .log-ml{font-size:15px;font-weight:500}.log-time{font-size:12px;color:var(--muted);margin-top:1px}
+    .log-ml{font-size:clamp(14px,4vw,16px);font-weight:500}
+    .log-time{font-size:clamp(11px,3vw,13px);color:var(--muted);margin-top:1px}
     .log-info{display:flex;flex-direction:column}
-    .btn-del{background:none;border:none;color:var(--hint);font-size:18px;cursor:pointer;padding:4px 8px;line-height:1}
+    .btn-del{background:none;border:none;color:var(--hint);font-size:20px;cursor:pointer;padding:8px 10px;line-height:1;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
     .btn-del:active{color:#ff5a5a}
-    .log-empty{font-size:14px;color:var(--muted);padding:1.25rem 0;text-align:center}
+    .log-empty{font-size:clamp(13px,3.5vw,15px);color:var(--muted);padding:1.25rem 0;text-align:center}
 
-    /* ── CELEBRATION OVERLAY ── */
+    /* ── CELEBRATION ── */
     #celebration{position:fixed;inset:0;background:rgba(10,15,30,.92);z-index:200;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem}
     #celebration.show{display:flex}
     .cel-emoji{font-size:72px;margin-bottom:1rem;animation:pop .4s ease}
-    .cel-title{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:.5rem}
-    .cel-msg{font-size:15px;color:var(--muted);line-height:1.6;max-width:280px;margin:0 auto 2rem}
-    .btn-cel{background:var(--green);color:#fff;border:none;border-radius:var(--radius);font-size:16px;font-weight:600;padding:16px 40px;cursor:pointer}
+    .cel-title{font-size:clamp(22px,6vw,28px);font-weight:700;letter-spacing:-.5px;margin-bottom:.5rem}
+    .cel-msg{font-size:clamp(14px,4vw,16px);color:var(--muted);line-height:1.6;max-width:280px;margin:0 auto 2rem}
+    .btn-cel{background:var(--green);color:#fff;border:none;border-radius:var(--radius);font-size:16px;font-weight:600;padding:16px 40px;cursor:pointer;min-height:52px}
     @keyframes pop{0%{transform:scale(.5)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
     .confetti-piece{position:absolute;width:8px;height:8px;border-radius:2px;animation:fall linear forwards}
     @keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
     /* ── HISTORY ── */
-    .hist-title{font-size:18px;font-weight:600;margin-bottom:1.25rem}
+    .hist-title{font-size:clamp(16px,4.5vw,20px);font-weight:600;margin-bottom:1.25rem}
     .hist-chart-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:1.25rem}
     .hist-chart-label{font-size:12px;color:var(--muted);margin-bottom:12px}
-    .bar-chart{display:flex;align-items:flex-end;gap:6px;height:120px}
-    .bar-col{display:flex;flex-direction:column;align-items:center;flex:1;height:100%}
-    .bar-outer{flex:1;width:100%;display:flex;align-items:flex-end;border-radius:4px 4px 0 0;overflow:hidden;position:relative;background:var(--surface2)}
+    .bar-chart{display:flex;align-items:flex-end;gap:4px;height:130px}
+    .bar-col{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;min-width:0}
+    .bar-outer{flex:1;width:100%;display:flex;align-items:flex-end;border-radius:4px 4px 0 0;overflow:hidden;background:var(--surface2)}
     .bar-inner{width:100%;border-radius:4px 4px 0 0;transition:height .5s ease;background:var(--blue)}
     .bar-inner.done{background:var(--green)}
-    .bar-day{font-size:10px;color:var(--hint);margin-top:5px;white-space:nowrap}
-    .bar-val{font-size:9px;color:var(--muted);margin-top:2px}
+    .bar-day{font-size:9px;color:var(--hint);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
     .hist-legend{display:flex;gap:16px;margin-top:12px}
     .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
-    .legend-dot{width:8px;height:8px;border-radius:2px}
+    .legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+    .hist-filter-row{display:flex;gap:8px;margin-bottom:1rem;overflow-x:auto;padding-bottom:4px}
+    .hist-filter-row::-webkit-scrollbar{display:none}
+    .btn-filter{background:var(--surface);border:1px solid var(--border);border-radius:99px;color:var(--muted);font-size:13px;padding:6px 14px;cursor:pointer;white-space:nowrap;min-height:36px}
+    .btn-filter.active{background:var(--blue-dim);border-color:rgba(59,158,255,.3);color:var(--blue)}
     .hist-days-list{display:flex;flex-direction:column;gap:8px}
     .hist-day{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
     .hist-day-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .hist-day-date{font-size:14px;font-weight:500;text-transform:capitalize}
-    .hist-day-total{font-size:14px;font-weight:600;color:var(--blue)}
+    .hist-day-date{font-size:clamp(13px,3.5vw,15px);font-weight:500;text-transform:capitalize}
+    .hist-day-total{font-size:clamp(13px,3.5vw,15px);font-weight:600;color:var(--blue)}
     .hist-day-total.done{color:var(--green)}
     .hist-bar-bg{background:var(--surface2);border-radius:99px;height:5px;overflow:hidden;margin-bottom:6px}
     .hist-bar-fill{height:100%;border-radius:99px;background:var(--blue);transition:width .4s}
     .hist-bar-fill.done{background:var(--green)}
-    .hist-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+    .hist-meta{display:flex;justify-content:space-between;font-size:clamp(11px,3vw,13px);color:var(--muted)}
     .hist-empty{text-align:center;color:var(--muted);font-size:14px;padding:3rem 1rem}
+    .hist-summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem}
+    .hist-sum-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px}
+    .hist-sum-val{font-size:clamp(18px,5vw,22px);font-weight:700}
+    .hist-sum-lbl{font-size:11px;color:var(--muted);margin-top:2px}
 
     /* ── SETTINGS SHEET ── */
     #settings-sheet{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150;display:none;align-items:flex-end}
     #settings-sheet.show{display:flex}
-    .sheet-inner{background:var(--surface);border-radius:24px 24px 0 0;padding:1.5rem 1.25rem 2rem;width:100%;max-height:85vh;overflow-y:auto}
+    .sheet-inner{background:var(--surface);border-radius:24px 24px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-height:90vh;overflow-y:auto}
     .sheet-handle{width:36px;height:4px;background:var(--surface2);border-radius:2px;margin:0 auto 1.25rem}
     .sheet-title{font-size:17px;font-weight:600;margin-bottom:1.25rem}
-    .setting-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
-    .setting-row:last-child{border-bottom:none}
-    .setting-lbl{font-size:15px}.setting-sub{font-size:12px;color:var(--muted);margin-top:1px}
+    .setting-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+    .setting-row:last-of-type{border-bottom:none}
+    .setting-lbl{font-size:15px}
+    .setting-sub{font-size:12px;color:var(--muted);margin-top:1px}
     .setting-val{font-size:15px;color:var(--blue);font-weight:500}
-    .setting-input{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;padding:8px 10px;width:90px;text-align:right}
-    .btn-sheet-close{width:100%;background:var(--surface2);border:none;border-radius:var(--radius-sm);color:var(--text);font-size:15px;font-weight:500;padding:14px;cursor:pointer;margin-top:1rem}
-    .btn-reset{width:100%;background:transparent;border:1px solid rgba(255,80,80,.3);border-radius:var(--radius-sm);color:#ff6b6b;font-size:14px;padding:12px;cursor:pointer;margin-top:.5rem}
+    .setting-input{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;padding:8px 10px;width:90px;text-align:right;min-height:40px}
+    .sheet-actions{display:flex;flex-direction:column;gap:8px;margin-top:1.25rem}
+    .btn-sheet-primary{width:100%;background:var(--blue);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:600;padding:14px;cursor:pointer;min-height:48px}
+    .btn-sheet-secondary{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;padding:13px;cursor:pointer;min-height:48px}
+    .btn-reset{width:100%;background:transparent;border:1px solid rgba(255,80,80,.3);border-radius:var(--radius-sm);color:#ff6b6b;font-size:14px;padding:12px;cursor:pointer;min-height:44px}
+
+    /* ── SHARE CARD (off-screen canvas) ── */
+    #share-canvas-wrap{position:fixed;left:-9999px;top:0;pointer-events:none}
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     ONBOARDING
-══════════════════════════════════════ -->
+<!-- ══ ONBOARDING ══ -->
 <div id="onboarding">
   <div class="ob-wrap">
-
-    <!-- Step 0: Bienvenida + nombre -->
     <div class="ob-step active" id="ob-step-0">
-      <div class="ob-dots">
-        <div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div>
-      </div>
+      <div class="ob-dots"><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
       <div class="ob-eyebrow">Bienvenida</div>
       <div class="ob-title">Tu tracker de hidratación personalizado</div>
       <div class="ob-sub">En 3 pasos calculamos cuánta agua necesitás exactamente, según tu cuerpo.</div>
@@ -187,14 +209,11 @@
       <button class="btn-ob" onclick="obNext(0)">Continuar →</button>
     </div>
 
-    <!-- Step 1: Datos físicos -->
     <div class="ob-step" id="ob-step-1">
-      <div class="ob-dots">
-        <div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div>
-      </div>
+      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
       <div class="ob-eyebrow">Tu cuerpo</div>
       <div class="ob-title">Datos para calcular tu meta</div>
-      <div class="ob-sub">Usamos la fórmula de hidratación de la OMS adaptada por sexo y actividad física.</div>
+      <div class="ob-sub">Usamos una estimación basada en 35 ml/kg ajustada por sexo y actividad física.</div>
       <div class="ob-fields">
         <div class="ob-field">
           <label>Sexo biológico</label>
@@ -226,13 +245,10 @@
       <button class="btn-ob-ghost" onclick="obBack(1)">← Volver</button>
     </div>
 
-    <!-- Step 2: Resultado -->
     <div class="ob-step" id="ob-step-2">
-      <div class="ob-dots">
-        <div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div>
-      </div>
+      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div></div>
       <div class="ob-eyebrow">Tu meta calculada</div>
-      <div class="ob-title">¡Perfecto, <span class="ob-name-display" id="ob-name-show">!</span></div>
+      <div class="ob-title">¡Perfecto, <span class="ob-name-display" id="ob-name-show"></span>!</div>
       <div class="ob-result">
         <div class="ob-result-val" id="ob-result-val">2 500</div>
         <div class="ob-result-unit">ml por día</div>
@@ -244,41 +260,26 @@
       <button class="btn-ob-ghost" onclick="obBack(2)">← Recalcular</button>
     </div>
 
-    <!-- Step 3: Botella -->
     <div class="ob-step" id="ob-step-3">
-      <div class="ob-dots">
-        <div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div>
-      </div>
+      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div></div>
       <div class="ob-eyebrow">Tu recipiente</div>
       <div class="ob-title">¿Qué usás para tomar agua?</div>
-      <div class="ob-sub">El botón principal registrará esta cantidad. Siempre podés agregar otras cantidades.</div>
+      <div class="ob-sub">El botón principal registrará esta cantidad.</div>
       <div class="ob-bottle-row">
         <div class="bottle-opt sel" id="bopt-900" onclick="selectBottle(900)">
-          <div class="bottle-opt-left">
-            <span class="bottle-opt-emoji">🫙</span>
-            <div><div class="bottle-opt-name">Botella grande</div><div class="bottle-opt-ml">900 ml</div></div>
-          </div>
+          <div class="bottle-opt-left"><span class="bottle-opt-emoji">🫙</span><div><div class="bottle-opt-name">Botella grande</div><div class="bottle-opt-ml">900 ml</div></div></div>
           <div class="bottle-check">✓</div>
         </div>
         <div class="bottle-opt" id="bopt-750" onclick="selectBottle(750)">
-          <div class="bottle-opt-left">
-            <span class="bottle-opt-emoji">🍶</span>
-            <div><div class="bottle-opt-name">Botella mediana</div><div class="bottle-opt-ml">750 ml</div></div>
-          </div>
+          <div class="bottle-opt-left"><span class="bottle-opt-emoji">🍶</span><div><div class="bottle-opt-name">Botella mediana</div><div class="bottle-opt-ml">750 ml</div></div></div>
           <div class="bottle-check"></div>
         </div>
         <div class="bottle-opt" id="bopt-500" onclick="selectBottle(500)">
-          <div class="bottle-opt-left">
-            <span class="bottle-opt-emoji">🥤</span>
-            <div><div class="bottle-opt-name">Botella chica</div><div class="bottle-opt-ml">500 ml</div></div>
-          </div>
+          <div class="bottle-opt-left"><span class="bottle-opt-emoji">🥤</span><div><div class="bottle-opt-name">Botella chica</div><div class="bottle-opt-ml">500 ml</div></div></div>
           <div class="bottle-check"></div>
         </div>
         <div class="bottle-opt" id="bopt-custom" onclick="selectBottle('custom')">
-          <div class="bottle-opt-left">
-            <span class="bottle-opt-emoji">✏️</span>
-            <div><div class="bottle-opt-name">Otra cantidad</div><div class="bottle-opt-ml" id="bopt-custom-lbl">personalizada</div></div>
-          </div>
+          <div class="bottle-opt-left"><span class="bottle-opt-emoji">✏️</span><div><div class="bottle-opt-name">Otra cantidad</div><div class="bottle-opt-ml" id="bopt-custom-lbl">personalizada</div></div></div>
           <div class="bottle-check"></div>
         </div>
       </div>
@@ -287,13 +288,10 @@
       </div>
       <button class="btn-ob" onclick="finishOnboarding()">¡Empezar! 💧</button>
     </div>
-
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     CELEBRATION
-══════════════════════════════════════ -->
+<!-- ══ CELEBRATION ══ -->
 <div id="celebration">
   <div id="cel-confetti"></div>
   <div class="cel-emoji" id="cel-emoji">🎉</div>
@@ -302,11 +300,8 @@
   <button class="btn-cel" onclick="closeCelebration()">¡Gracias! 💧</button>
 </div>
 
-<!-- ══════════════════════════════════════
-     MAIN APP
-══════════════════════════════════════ -->
+<!-- ══ MAIN APP ══ -->
 <div id="app">
-
   <div class="header">
     <div class="header-left">
       <h1>💧 Agua</h1>
@@ -322,6 +317,13 @@
 
   <!-- TODAY -->
   <div id="view-today" class="view active">
+
+    <div class="greeting-card" id="greeting-card">
+      <div class="greeting-time" id="greeting-time-label">Buenos días</div>
+      <div class="greeting-text" id="greeting-text">¡Hola!</div>
+      <div class="greeting-sub" id="greeting-sub"></div>
+    </div>
+
     <div class="hero">
       <span class="hero-val" id="hero-val">0</span>
       <span class="hero-unit">ml tomados hoy</span>
@@ -331,8 +333,7 @@
     <div class="ring-wrap">
       <svg width="130" height="130" viewBox="0 0 130 130">
         <circle class="ring-bg" cx="65" cy="65" r="54"/>
-        <circle class="ring-fill" id="ring-fill" cx="65" cy="65" r="54"
-          stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
+        <circle class="ring-fill" id="ring-fill" cx="65" cy="65" r="54" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
       </svg>
       <div class="ring-label">
         <span class="ring-pct" id="ring-pct">0%</span>
@@ -341,18 +342,9 @@
     </div>
 
     <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-val" id="stat-total">0</div>
-        <div class="stat-lbl">ml hoy</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val" id="stat-bottles">0</div>
-        <div class="stat-lbl">botellas</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val" id="stat-streak">0</div>
-        <div class="stat-lbl">días seguidos</div>
-      </div>
+      <div class="stat-card"><div class="stat-val" id="stat-total">0</div><div class="stat-lbl">ml hoy</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-bottles">0</div><div class="stat-lbl">botellas</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-streak">0</div><div class="stat-lbl">días seguidos</div></div>
     </div>
 
     <button class="btn-main" id="btn-main" onclick="addBottle()">
@@ -371,6 +363,13 @@
       <button class="btn-add-c" onclick="addCustom()">+ Agregar</button>
     </div>
 
+    <div class="share-row">
+      <button class="btn-share" onclick="shareDay()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Compartir mi día
+      </button>
+    </div>
+
     <div class="log-section">
       <div class="log-header">Registro de hoy</div>
       <div id="log-list"></div>
@@ -379,18 +378,34 @@
 
   <!-- HISTORY -->
   <div id="view-history" class="view">
-    <p class="hist-title">Historial</p>
+    <p class="hist-title">Historial completo</p>
+
+    <div class="hist-summary">
+      <div class="hist-sum-card"><div class="hist-sum-val" id="hist-sum-days">0</div><div class="hist-sum-lbl">días registrados</div></div>
+      <div class="hist-sum-card"><div class="hist-sum-val" id="hist-sum-streak">0</div><div class="hist-sum-lbl">mejor racha</div></div>
+      <div class="hist-sum-card"><div class="hist-sum-val" id="hist-sum-pct">0%</div><div class="hist-sum-lbl">días con meta</div></div>
+      <div class="hist-sum-card"><div class="hist-sum-val" id="hist-sum-avg">0</div><div class="hist-sum-lbl">promedio diario</div></div>
+    </div>
+
     <div class="hist-chart-wrap">
-      <div class="hist-chart-label">Últimos 14 días</div>
+      <div class="hist-chart-label" id="hist-chart-label">Últimos 14 días</div>
       <div class="bar-chart" id="bar-chart"></div>
       <div class="hist-legend">
         <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Meta lograda</div>
         <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>En progreso</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--surface2)"></div>Sin registro</div>
       </div>
     </div>
+
+    <div class="hist-filter-row">
+      <button class="btn-filter active" onclick="setHistFilter(14,this)">14 días</button>
+      <button class="btn-filter" onclick="setHistFilter(30,this)">30 días</button>
+      <button class="btn-filter" onclick="setHistFilter(90,this)">3 meses</button>
+      <button class="btn-filter" onclick="setHistFilter(0,this)">Todo</button>
+    </div>
+
     <div class="hist-days-list" id="hist-list"></div>
   </div>
-
 </div>
 
 <!-- SETTINGS SHEET -->
@@ -410,38 +425,95 @@
       <div><div class="setting-lbl">Botella principal</div><div class="setting-sub">ml del botón grande</div></div>
       <input class="setting-input" type="number" id="set-bottle" min="50" max="3000" step="50">
     </div>
-    <button class="btn-sheet-close" onclick="saveSettings()">Guardar y cerrar</button>
-    <button class="btn-reset" onclick="resetAll()">Reiniciar todo / cambiar perfil</button>
+    <div class="sheet-actions">
+      <button class="btn-sheet-primary" onclick="saveSettings()">Guardar cambios</button>
+      <button class="btn-sheet-secondary" onclick="exportData()">⬇ Exportar historial (JSON)</button>
+      <button class="btn-reset" onclick="resetAll()">Reiniciar todo / cambiar perfil</button>
+    </div>
   </div>
 </div>
 
+<!-- off-screen share canvas -->
+<div id="share-canvas-wrap"><canvas id="share-canvas" width="1080" height="1080"></canvas></div>
+
 <script>
 // ═══════════════════════════════════════════════
-//  STORAGE
+//  STORAGE  — historial ilimitado
 // ═══════════════════════════════════════════════
-const K_LOG      = 'hydro_log_v3';
-const K_PROFILE  = 'hydro_profile_v3';
-const CIRC       = 2 * Math.PI * 54; // r=54 → 339.3
+const K_LOG     = 'hydro_log_v3';
+const K_PROFILE = 'hydro_profile_v3';
+const CIRC      = 2 * Math.PI * 54;
 
 function allData(){ try{return JSON.parse(localStorage.getItem(K_LOG))||{}}catch{return{}} }
-function saveAll(d){ try{localStorage.setItem(K_LOG,JSON.stringify(d))}catch{alert('Almacenamiento lleno.')} }
+function saveAll(d){ try{localStorage.setItem(K_LOG,JSON.stringify(d))}catch{alert('Almacenamiento lleno. Exportá y limpiá datos viejos.')} }
 function getProfile(){ try{return JSON.parse(localStorage.getItem(K_PROFILE))||null}catch{return null} }
 function saveProfile(p){ localStorage.setItem(K_PROFILE,JSON.stringify(p)) }
-
 function todayKey(){ return new Date().toISOString().split('T')[0] }
 function todayEntries(){ return allData()[todayKey()]||[] }
 function saveToday(e){ const d=allData(); d[todayKey()]=e; saveAll(d) }
 
 // ═══════════════════════════════════════════════
-//  ONBOARDING STATE
+//  CONTEXTUAL GREETING
 // ═══════════════════════════════════════════════
-let obSex = null;
-let obBottleMl = 900;
+function buildGreeting(name, total, goal, streak){
+  const h = new Date().getHours();
+  const pct = total / goal;
+  let period, periodIcon;
+  if(h>=5&&h<12){period='Buenos días';periodIcon='🌅'}
+  else if(h>=12&&h<19){period='Buenas tardes';periodIcon='☀️'}
+  else{period='Buenas noches';periodIcon='🌙'}
+
+  let main, sub;
+
+  if(total===0){
+    if(h<10){
+      main=`${period}, ${name}! 💧`;
+      sub='Empezá el día con un vaso de agua. Tu cuerpo lo agradece antes del café.';
+    } else if(h<14){
+      main=`${period}, ${name}!`;
+      sub='Aún no registraste nada hoy. Una botella ahora te pone en camino.';
+    } else {
+      main=`${period}, ${name}.`;
+      sub='La tarde avanza y todavía está en cero. Un buen momento para ponerse al día.';
+    }
+  } else if(pct>=1){
+    main=`¡Meta cumplida, ${name}! 🏆`;
+    sub=streak>1?`${streak} días seguidos en meta. Eso es un hábito real.`:'Hidratación perfecta hoy. ¡Seguí así mañana!';
+  } else if(pct>=0.75){
+    const remaining=Math.round(goal-total);
+    main=`Casi llegás, ${name}! 💪`;
+    sub=`Solo faltan ${remaining.toLocaleString('es')} ml. ${h<18?'Vas muy bien para la hora.':'Una botella más y lo lográs.'}`;
+  } else if(pct>=0.5){
+    main=`Bien encaminada, ${name}. 👍`;
+    sub=h<15?'Vas a la mitad. Mantené el ritmo esta tarde.':'A la mitad del camino — es momento de acelerar un poco.';
+  } else if(pct>0){
+    main=`Seguimos, ${name}. 🌊`;
+    sub=h<12?'Arrancaste. Ahora mantené el ritmo, vaso a vaso.':'Todavía hay tiempo de llegar a la meta hoy.';
+  }
+
+  return {period:`${periodIcon} ${period}`,main,sub};
+}
+
+function updateGreeting(){
+  const p = getProfile();
+  if(!p) return;
+  const total = todayEntries().reduce((s,e)=>s+e.ml,0);
+  const streak = calcStreak();
+  const g = buildGreeting(p.name, total, p.goal, streak);
+  document.getElementById('greeting-time-label').textContent = g.period;
+  document.getElementById('greeting-text').textContent = g.main;
+  document.getElementById('greeting-sub').textContent = g.sub;
+}
+
+// ═══════════════════════════════════════════════
+//  ONBOARDING
+// ═══════════════════════════════════════════════
+let obSex=null, obBottleMl=900;
 
 function selectSex(s){
-  obSex = s;
-  document.getElementById('sex-f').classList.toggle('sel', s==='F');
-  document.getElementById('sex-m').classList.toggle('sel', s==='M');
+  obSex=s;
+  document.getElementById('sex-f').classList.toggle('sel',s==='F');
+  document.getElementById('sex-m').classList.toggle('sel',s==='M');
 }
 
 function selectBottle(val){
@@ -451,67 +523,56 @@ function selectBottle(val){
   });
   document.getElementById('bopt-'+val).classList.add('sel');
   document.getElementById('bopt-'+val).querySelector('.bottle-check').textContent='✓';
-  document.getElementById('custom-bottle-inp').style.display = val==='custom' ? 'flex' : 'none';
-  if(val !== 'custom') obBottleMl = val;
+  document.getElementById('custom-bottle-inp').style.display=val==='custom'?'flex':'none';
+  if(val!=='custom') obBottleMl=val;
 }
 
-function calcGoal(weight, height, sex, activity){
-  // Base: 35ml/kg (general), ajustado por sexo y actividad
-  // Hombres tienen mayor masa muscular → +10%
-  const base = weight * 35;
-  const sexFactor = sex === 'M' ? 1.08 : 1.0;
-  return Math.round((base * sexFactor * parseFloat(activity)) / 50) * 50;
+function calcGoal(weight,height,sex,activity){
+  const base=weight*35;
+  const sexFactor=sex==='M'?1.08:1.0;
+  return Math.round((base*sexFactor*parseFloat(activity))/50)*50;
 }
 
 function obNext(step){
-  if(step === 0){
-    const name = document.getElementById('ob-name').value.trim();
-    if(!name){ document.getElementById('ob-name').focus(); return; }
+  if(step===0){
+    const name=document.getElementById('ob-name').value.trim();
+    if(!name){document.getElementById('ob-name').focus();return;}
     goToStep(1);
-  } else if(step === 1){
-    if(!obSex){ alert('Por favor seleccioná tu sexo biológico.'); return; }
-    const w = parseFloat(document.getElementById('ob-weight').value);
-    const h = parseFloat(document.getElementById('ob-height').value);
-    const act = document.getElementById('ob-activity').value;
-    if(!w||w<30||w>250){ document.getElementById('ob-weight').focus(); return; }
-    if(!h||h<100||h>220){ document.getElementById('ob-height').focus(); return; }
-
-    const name = document.getElementById('ob-name').value.trim();
-    const goal = calcGoal(w, h, obSex, act);
-    const base = Math.round(w * 35);
-    const actLabel = document.getElementById('ob-activity').selectedOptions[0].text.split('(')[0].trim().toLowerCase();
-
-    document.getElementById('ob-name-show').textContent = name + '!';
-    document.getElementById('ob-result-val').textContent = goal.toLocaleString('es');
-    document.getElementById('ob-result-desc').textContent =
-      `Para una persona de ${Math.round(w)} kg con actividad ${actLabel}.`;
-    document.getElementById('ob-result-breakdown').textContent =
-      `Base: ${base} ml × ${obSex==='M'?'1,08 (masculino)':'1,00 (femenino)'} × ${act} (actividad)`;
+  } else if(step===1){
+    if(!obSex){alert('Por favor seleccioná tu sexo biológico.');return;}
+    const w=parseFloat(document.getElementById('ob-weight').value);
+    const h=parseFloat(document.getElementById('ob-height').value);
+    const act=document.getElementById('ob-activity').value;
+    if(!w||w<30||w>250){document.getElementById('ob-weight').focus();return;}
+    if(!h||h<100||h>220){document.getElementById('ob-height').focus();return;}
+    const name=document.getElementById('ob-name').value.trim();
+    const goal=calcGoal(w,h,obSex,act);
+    const base=Math.round(w*35);
+    const actLabel=document.getElementById('ob-activity').selectedOptions[0].text.split('(')[0].trim().toLowerCase();
+    document.getElementById('ob-name-show').textContent=name;
+    document.getElementById('ob-result-val').textContent=goal.toLocaleString('es');
+    document.getElementById('ob-result-desc').textContent=`Para ${Math.round(w)} kg con actividad ${actLabel}.`;
+    document.getElementById('ob-result-breakdown').textContent=`Base: ${base} ml × ${obSex==='M'?'1,08 (masc.)':'1,00 (fem.)'} × ${act} (actividad)`;
     goToStep(2);
-  } else if(step === 2){
+  } else if(step===2){
     goToStep(3);
   }
 }
-
-function obBack(step){ goToStep(step - 1) }
-
-function goToStep(n){
-  document.querySelectorAll('.ob-step').forEach((s,i)=>s.classList.toggle('active',i===n));
-}
+function obBack(step){goToStep(step-1)}
+function goToStep(n){document.querySelectorAll('.ob-step').forEach((s,i)=>s.classList.toggle('active',i===n))}
 
 function finishOnboarding(){
-  if(obBottleMl === 'custom'){
-    const cm = parseInt(document.getElementById('ob-custom-ml').value);
-    if(!cm||cm<50){ document.getElementById('ob-custom-ml').focus(); return; }
-    obBottleMl = cm;
+  if(obBottleMl==='custom'){
+    const cm=parseInt(document.getElementById('ob-custom-ml').value);
+    if(!cm||cm<50){document.getElementById('ob-custom-ml').focus();return;}
+    obBottleMl=cm;
   }
-  const name   = document.getElementById('ob-name').value.trim();
-  const w      = parseFloat(document.getElementById('ob-weight').value)||70;
-  const h      = parseFloat(document.getElementById('ob-height').value)||170;
-  const act    = document.getElementById('ob-activity').value||'1.2';
-  const goal   = calcGoal(w, h, obSex||'F', act);
-
-  saveProfile({ name, weight:w, height:h, sex:obSex, activity:act, goal, bottleMl:obBottleMl });
+  const name=document.getElementById('ob-name').value.trim();
+  const w=parseFloat(document.getElementById('ob-weight').value)||70;
+  const h=parseFloat(document.getElementById('ob-height').value)||170;
+  const act=document.getElementById('ob-activity').value||'1.2';
+  const goal=calcGoal(w,h,obSex||'F',act);
+  saveProfile({name,weight:w,height:h,sex:obSex,activity:act,goal,bottleMl:obBottleMl});
   startApp();
 }
 
@@ -519,81 +580,77 @@ function finishOnboarding(){
 //  APP INIT
 // ═══════════════════════════════════════════════
 function startApp(){
-  document.getElementById('onboarding').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-
-  const p = getProfile();
-  if(!p) return;
-
-  document.getElementById('header-date').textContent =
+  document.getElementById('onboarding').style.display='none';
+  document.getElementById('app').style.display='block';
+  const p=getProfile(); if(!p) return;
+  document.getElementById('header-date').textContent=
     new Date().toLocaleDateString('es-CA',{weekday:'long',day:'numeric',month:'long'});
-
-  const bml = p.bottleMl || 900;
-  document.getElementById('btn-main-label').textContent = `Tomé una botella — ${bml} ml`;
-
+  document.getElementById('btn-main-label').textContent=`Tomé una botella — ${p.bottleMl||900} ml`;
   render();
+  updateGreeting();
 }
 
-window.addEventListener('load', ()=>{
-  const p = getProfile();
-  if(p){ startApp(); } // already onboarded
+window.addEventListener('load',()=>{
+  const p=getProfile();
+  if(p) startApp();
 });
 
 // ═══════════════════════════════════════════════
 //  ACTIONS
 // ═══════════════════════════════════════════════
 function addBottle(){
-  const p = getProfile();
-  addWater(p ? p.bottleMl : 900);
-  const btn = document.getElementById('btn-main');
+  const p=getProfile();
+  addWater(p?p.bottleMl:900);
+  const btn=document.getElementById('btn-main');
   btn.classList.add('success');
-  btn.querySelector('#btn-main-label').textContent = '✓ ¡Registrado!';
+  btn.querySelector('#btn-main-label').textContent='✓ ¡Registrado!';
   setTimeout(()=>{
     btn.classList.remove('success');
-    const bml = (getProfile()||{bottleMl:900}).bottleMl;
-    btn.querySelector('#btn-main-label').textContent = `Tomé una botella — ${bml} ml`;
-  }, 1400);
+    const bml=(getProfile()||{bottleMl:900}).bottleMl;
+    btn.querySelector('#btn-main-label').textContent=`Tomé una botella — ${bml} ml`;
+  },1400);
 }
 
-let celebrationShown = false;
+let celebrationShown=false;
 
 function addWater(ml){
-  const p = getProfile();
-  const goal = p ? p.goal : 2700;
-  const before = todayEntries().reduce((s,e)=>s+e.ml,0);
-  const now = new Date();
-  const entries = todayEntries();
-  entries.push({ ml, time: now.toLocaleTimeString('es-CA',{hour:'2-digit',minute:'2-digit'}), ts: now.getTime() });
+  const p=getProfile();
+  const goal=p?p.goal:2700;
+  const before=todayEntries().reduce((s,e)=>s+e.ml,0);
+  const now=new Date();
+  const entries=todayEntries();
+  entries.push({ml,time:now.toLocaleTimeString('es-CA',{hour:'2-digit',minute:'2-digit'}),ts:now.getTime()});
   saveToday(entries);
-  const after = entries.reduce((s,e)=>s+e.ml,0);
+  const after=entries.reduce((s,e)=>s+e.ml,0);
   render();
-  if(before < goal && after >= goal && !celebrationShown){
-    celebrationShown = true;
-    setTimeout(()=>showCelebration(p ? p.name : null), 600);
+  updateGreeting();
+  if(before<goal&&after>=goal&&!celebrationShown){
+    celebrationShown=true;
+    setTimeout(()=>showCelebration(p?p.name:null),600);
   }
 }
 
 function addCustom(){
-  const ml = parseInt(document.getElementById('custom-inp').value);
+  const ml=parseInt(document.getElementById('custom-inp').value);
   if(!ml||ml<1||ml>5000) return;
   addWater(ml);
   document.getElementById('custom-inp').value='';
 }
 
 function removeEntry(ts){
-  const p = getProfile();
-  const goal = p ? p.goal : 2700;
-  const entries = todayEntries().filter(e=>e.ts!==ts);
+  const p=getProfile();
+  const goal=p?p.goal:2700;
+  const entries=todayEntries().filter(e=>e.ts!==ts);
   saveToday(entries);
-  const total = entries.reduce((s,e)=>s+e.ml,0);
-  if(total < goal) celebrationShown = false;
+  if(entries.reduce((s,e)=>s+e.ml,0)<goal) celebrationShown=false;
   render();
+  updateGreeting();
 }
 
 // ═══════════════════════════════════════════════
 //  CELEBRATION
 // ═══════════════════════════════════════════════
-const MESSAGES = [
+const MESSAGES=[
   ['🎉','¡Meta cumplida!','Tu cuerpo te lo agradece. Hidratación perfecta hoy.'],
   ['💧','¡Increíble!','Completaste tu meta de hidratación. ¡Seguí así!'],
   ['🏆','¡Campeona!','Tu disciplina con el agua es un hábito poderoso.'],
@@ -602,35 +659,21 @@ const MESSAGES = [
 ];
 
 function showCelebration(name){
-  const m = MESSAGES[Math.floor(Math.random()*MESSAGES.length)];
-  document.getElementById('cel-emoji').textContent = m[0];
-  document.getElementById('cel-title').textContent = name ? `¡${name}, ${m[1].replace('¡','').replace('!','')}!` : m[1];
-  document.getElementById('cel-msg').textContent = m[2];
-  const cel = document.getElementById('celebration');
-  cel.classList.add('show');
+  const m=MESSAGES[Math.floor(Math.random()*MESSAGES.length)];
+  document.getElementById('cel-emoji').textContent=m[0];
+  document.getElementById('cel-title').textContent=name?`¡${name}, ${m[1].replace(/[¡!]/g,'')}!`:m[1];
+  document.getElementById('cel-msg').textContent=m[2];
+  document.getElementById('celebration').classList.add('show');
   spawnConfetti();
 }
-
-function closeCelebration(){
-  document.getElementById('celebration').classList.remove('show');
-}
-
+function closeCelebration(){document.getElementById('celebration').classList.remove('show')}
 function spawnConfetti(){
-  const container = document.getElementById('cel-confetti');
-  container.innerHTML = '';
-  const colors = ['#3b9eff','#22c98a','#f5a623','#ff6b9d','#a78bfa'];
+  const c=document.getElementById('cel-confetti'); c.innerHTML='';
+  const cols=['#3b9eff','#22c98a','#f5a623','#ff6b9d','#a78bfa'];
   for(let i=0;i<30;i++){
-    const el = document.createElement('div');
-    el.className = 'confetti-piece';
-    el.style.cssText = `
-      left:${Math.random()*100}%;
-      top:0;
-      background:${colors[Math.floor(Math.random()*colors.length)]};
-      animation-duration:${1.5+Math.random()*2}s;
-      animation-delay:${Math.random()*.5}s;
-      transform:rotate(${Math.random()*360}deg);
-    `;
-    container.appendChild(el);
+    const el=document.createElement('div'); el.className='confetti-piece';
+    el.style.cssText=`left:${Math.random()*100}%;top:0;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*.5}s;transform:rotate(${Math.random()*360}deg);`;
+    c.appendChild(el);
   }
 }
 
@@ -638,57 +681,73 @@ function spawnConfetti(){
 //  STREAK
 // ═══════════════════════════════════════════════
 function calcStreak(){
-  const p = getProfile();
-  const goal = p ? p.goal : 2700;
-  const data = allData();
-  const today = todayKey();
-  let streak = 0;
-  for(let i=0;i<365;i++){
-    const d = new Date(); d.setDate(d.getDate()-i);
-    const k = d.toISOString().split('T')[0];
-    const total = (data[k]||[]).reduce((s,e)=>s+e.ml,0);
-    if(total >= goal) streak++;
+  const p=getProfile(); const goal=p?p.goal:2700;
+  const data=allData(); let streak=0;
+  for(let i=0;i<3650;i++){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const k=d.toISOString().split('T')[0];
+    const total=(data[k]||[]).reduce((s,e)=>s+e.ml,0);
+    if(total>=goal) streak++;
     else if(i>0) break;
   }
   return streak;
+}
+
+function calcBestStreak(){
+  const p=getProfile(); const goal=p?p.goal:2700;
+  const data=allData();
+  const keys=Object.keys(data).sort();
+  let best=0, cur=0, prevKey=null;
+  for(const k of keys){
+    const total=(data[k]||[]).reduce((s,e)=>s+e.ml,0);
+    if(total>=goal){
+      if(prevKey){
+        const prev=new Date(prevKey+'T12:00:00');
+        const cur2=new Date(k+'T12:00:00');
+        const diff=(cur2-prev)/(1000*60*60*24);
+        cur = diff<=1.5 ? cur+1 : 1;
+      } else {cur=1;}
+      if(cur>best) best=cur;
+    } else { cur=0; }
+    prevKey=k;
+  }
+  return best;
 }
 
 // ═══════════════════════════════════════════════
 //  RENDER TODAY
 // ═══════════════════════════════════════════════
 function render(){
-  const p = getProfile();
-  const goal = p ? p.goal : 2700;
-  const entries = todayEntries();
-  const total = entries.reduce((s,e)=>s+e.ml,0);
-  const bottles = entries.filter(e=>e.ml===(p?p.bottleMl:900)).length;
-  const pct = Math.min(100,Math.round((total/goal)*100));
-  const remaining = Math.max(0,goal-total);
+  const p=getProfile(); const goal=p?p.goal:2700;
+  const entries=todayEntries();
+  const total=entries.reduce((s,e)=>s+e.ml,0);
+  const bottles=entries.filter(e=>e.ml===(p?p.bottleMl:900)).length;
+  const pct=Math.min(100,Math.round((total/goal)*100));
+  const remaining=Math.max(0,goal-total);
 
-  document.getElementById('hero-val').textContent = total.toLocaleString('es');
-  document.getElementById('hero-remaining').textContent = remaining > 0
-    ? `Faltan ${remaining.toLocaleString('es')} ml para tu meta`
-    : '¡Meta alcanzada hoy! 🎉';
+  document.getElementById('hero-val').textContent=total.toLocaleString('es');
+  document.getElementById('hero-remaining').textContent=remaining>0
+    ?`Faltan ${remaining.toLocaleString('es')} ml para tu meta`
+    :'¡Meta alcanzada hoy! 🎉';
 
-  const offset = CIRC - (CIRC*pct/100);
-  document.getElementById('ring-fill').style.strokeDashoffset = offset;
-  document.getElementById('ring-fill').style.stroke = pct>=100?'var(--green)':'var(--blue)';
-  document.getElementById('ring-pct').textContent = pct+'%';
-  document.getElementById('ring-sub').textContent = bottles===1?'1 botella':bottles+' botellas';
+  const offset=CIRC-(CIRC*pct/100);
+  document.getElementById('ring-fill').style.strokeDashoffset=offset;
+  document.getElementById('ring-fill').style.stroke=pct>=100?'var(--green)':'var(--blue)';
+  document.getElementById('ring-pct').textContent=pct+'%';
+  document.getElementById('ring-sub').textContent=bottles===1?'1 botella':bottles+' botellas';
 
-  document.getElementById('stat-total').textContent = total>=1000
-    ? (total/1000).toFixed(1).replace('.',',')+' L' : total;
-  document.getElementById('stat-bottles').textContent = bottles;
-  document.getElementById('stat-streak').textContent = calcStreak();
+  document.getElementById('stat-total').textContent=total>=1000
+    ?(total/1000).toFixed(1).replace('.',',')+' L':total;
+  document.getElementById('stat-bottles').textContent=bottles;
+  document.getElementById('stat-streak').textContent=calcStreak();
 
-  const list = document.getElementById('log-list');
+  const list=document.getElementById('log-list');
   if(entries.length===0){
-    list.innerHTML = '<div class="log-empty">Sin registros — acercá el chip o tocá el botón</div>';
+    list.innerHTML='<div class="log-empty">Sin registros — acercá el chip o tocá el botón</div>';
   } else {
-    list.innerHTML = [...entries].reverse().map(e=>`
+    list.innerHTML=[...entries].reverse().map(e=>`
       <div class="log-item">
-        <div class="log-left">
-          <div class="log-dot"></div>
+        <div class="log-left"><div class="log-dot"></div>
           <div class="log-info">
             <span class="log-ml">+${e.ml.toLocaleString('es')} ml</span>
             <span class="log-time">${e.time}</span>
@@ -700,54 +759,72 @@ function render(){
 }
 
 // ═══════════════════════════════════════════════
-//  RENDER HISTORY
+//  HISTORY — filtro variable, historial completo
 // ═══════════════════════════════════════════════
+let histDays=14;
+
+function setHistFilter(days,btn){
+  histDays=days;
+  document.querySelectorAll('.btn-filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderHistory();
+}
+
 function renderHistory(){
-  const p = getProfile();
-  const goal = p ? p.goal : 2700;
-  const data = allData();
+  const p=getProfile(); const goal=p?p.goal:2700;
+  const data=allData();
+  const allKeys=Object.keys(data).sort().reverse();
 
-  // Build last 14 days
-  const days14 = [];
-  for(let i=13;i>=0;i--){
-    const d = new Date(); d.setDate(d.getDate()-i);
-    const k = d.toISOString().split('T')[0];
-    const entries = data[k]||[];
-    const total = entries.reduce((s,e)=>s+e.ml,0);
-    days14.push({ k, total, date:d });
+  // Summary stats
+  const totalDays=allKeys.length;
+  const goalDays=allKeys.filter(k=>(data[k]||[]).reduce((s,e)=>s+e.ml,0)>=goal).length;
+  const avgTotal=totalDays>0
+    ?Math.round(allKeys.reduce((s,k)=>(data[k]||[]).reduce((ss,e)=>ss+e.ml,0)+s,0)/totalDays):0;
+  document.getElementById('hist-sum-days').textContent=totalDays;
+  document.getElementById('hist-sum-streak').textContent=calcBestStreak();
+  document.getElementById('hist-sum-pct').textContent=totalDays>0?Math.round(goalDays/totalDays*100)+'%':'0%';
+  document.getElementById('hist-sum-avg').textContent=avgTotal>=1000?(avgTotal/1000).toFixed(1).replace('.',',')+' L':avgTotal+' ml';
+
+  // Bar chart — last N days (or all)
+  const chartDays = histDays===0 ? Math.min(allKeys.length, 60) : histDays;
+  const days=[];
+  for(let i=chartDays-1;i>=0;i--){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const k=d.toISOString().split('T')[0];
+    const entries=data[k]||[];
+    const total=entries.reduce((s,e)=>s+e.ml,0);
+    days.push({k,total,date:d});
   }
+  document.getElementById('hist-chart-label').textContent=
+    histDays===0?`Todo el historial (${chartDays} días mostrados)`:`Últimos ${chartDays} días`;
 
-  // Bar chart
-  const maxVal = Math.max(...days14.map(d=>d.total), goal);
-  const chart = document.getElementById('bar-chart');
-  chart.innerHTML = days14.map(d=>{
-    const heightPct = d.total>0 ? Math.round((d.total/maxVal)*100) : 0;
-    const done = d.total >= goal;
-    const dayLabel = d.date.toLocaleDateString('es-CA',{weekday:'short'}).replace('.','');
-    const isToday = d.k === todayKey();
+  const maxVal=Math.max(...days.map(d=>d.total),goal,1);
+  document.getElementById('bar-chart').innerHTML=days.map(d=>{
+    const hp=d.total>0?Math.round((d.total/maxVal)*100):0;
+    const done=d.total>=goal;
+    const isToday=d.k===todayKey();
+    const lbl=d.date.toLocaleDateString('es-CA',{weekday:'short'}).replace('.','');
     return `<div class="bar-col">
-      <div class="bar-outer">
-        <div class="bar-inner ${done?'done':''}" style="height:${heightPct}%"></div>
-      </div>
-      <div class="bar-day" style="${isToday?'color:var(--blue);font-weight:600':''}">${dayLabel}</div>
+      <div class="bar-outer"><div class="bar-inner ${done?'done':''}" style="height:${hp}%"></div></div>
+      <div class="bar-day" style="${isToday?'color:var(--blue);font-weight:700':''}">${lbl}</div>
     </div>`;
   }).join('');
 
-  // Day list (sorted desc)
-  const keys = Object.keys(data).sort().reverse();
-  const list = document.getElementById('hist-list');
-  if(keys.length===0){
+  // Day list
+  const listKeys = histDays===0 ? allKeys : allKeys.slice(0, histDays);
+  const list=document.getElementById('hist-list');
+  if(listKeys.length===0){
     list.innerHTML='<div class="hist-empty">Sin historial aún. ¡Empezá a registrar!</div>';
     return;
   }
-  list.innerHTML = keys.map(k=>{
-    const entries = data[k]||[];
-    const total = entries.reduce((s,e)=>s+e.ml,0);
-    const pct = Math.min(100,Math.round((total/goal)*100));
-    const done = total>=goal;
-    const isToday = k===todayKey();
-    const date = new Date(k+'T12:00:00');
-    const label = date.toLocaleDateString('es-CA',{weekday:'long',day:'numeric',month:'long'});
+  list.innerHTML=listKeys.map(k=>{
+    const entries=data[k]||[];
+    const total=entries.reduce((s,e)=>s+e.ml,0);
+    const pct=Math.min(100,Math.round((total/goal)*100));
+    const done=total>=goal;
+    const isToday=k===todayKey();
+    const date=new Date(k+'T12:00:00');
+    const label=date.toLocaleDateString('es-CA',{weekday:'long',day:'numeric',month:'long'});
     return `<div class="hist-day">
       <div class="hist-day-header">
         <span class="hist-day-date">${isToday?'Hoy — ':''}${label}</span>
@@ -763,9 +840,176 @@ function renderHistory(){
 }
 
 // ═══════════════════════════════════════════════
+//  EXPORT JSON
+// ═══════════════════════════════════════════════
+function exportData(){
+  const p=getProfile()||{};
+  const export_obj={
+    exported_at: new Date().toISOString(),
+    app: 'Hydration Tracker',
+    profile:{
+      name: p.name,
+      daily_goal_ml: p.goal,
+      bottle_ml: p.bottleMl,
+      sex: p.sex,
+      weight_kg: p.weight,
+      height_cm: p.height
+    },
+    daily_log: {}
+  };
+  const data=allData();
+  Object.keys(data).sort().forEach(k=>{
+    const entries=data[k]||[];
+    export_obj.daily_log[k]={
+      total_ml: entries.reduce((s,e)=>s+e.ml,0),
+      goal_ml: p.goal,
+      goal_reached: entries.reduce((s,e)=>s+e.ml,0)>=(p.goal||2700),
+      entries: entries.map(e=>({time:e.time,ml:e.ml}))
+    };
+  });
+  const blob=new Blob([JSON.stringify(export_obj,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  const today=todayKey();
+  a.download=`agua-historial-${today}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  document.getElementById('settings-sheet').classList.remove('show');
+}
+
+// ═══════════════════════════════════════════════
+//  SHARE — genera imagen con Canvas API
+// ═══════════════════════════════════════════════
+async function shareDay(){
+  const p=getProfile()||{name:'',goal:2700};
+  const entries=todayEntries();
+  const total=entries.reduce((s,e)=>s+e.ml,0);
+  const pct=Math.min(100,Math.round((total/p.goal)*100));
+  const done=total>=p.goal;
+  const streak=calcStreak();
+  const today=new Date().toLocaleDateString('es-CA',{weekday:'long',day:'numeric',month:'long'});
+
+  const canvas=document.getElementById('share-canvas');
+  const ctx=canvas.getContext('2d');
+  const W=1080, H=1080;
+  canvas.width=W; canvas.height=H;
+
+  // Background
+  ctx.fillStyle='#0a0f1e';
+  ctx.fillRect(0,0,W,H);
+
+  // Subtle grid dots
+  ctx.fillStyle='rgba(59,158,255,0.06)';
+  for(let x=40;x<W;x+=60) for(let y=40;y<H;y+=60){
+    ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
+  }
+
+  // Title
+  ctx.fillStyle='rgba(59,158,255,0.85)';
+  ctx.font='700 36px -apple-system,system-ui,sans-serif';
+  ctx.textAlign='center';
+  ctx.fillText('HIDRATACIÓN DEL DÍA', W/2, 100);
+
+  // Name · date
+  ctx.fillStyle='rgba(240,244,255,0.9)';
+  ctx.font='700 52px -apple-system,system-ui,sans-serif';
+  ctx.fillText(p.name, W/2, 178);
+
+  ctx.fillStyle='rgba(240,244,255,0.38)';
+  ctx.font='28px -apple-system,system-ui,sans-serif';
+  ctx.fillText(today, W/2, 220);
+
+  // Ring
+  const cx=W/2, cy=430, r=180, ringW=22;
+  ctx.strokeStyle='#1a2234';
+  ctx.lineWidth=ringW;
+  ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
+
+  const startAngle=-Math.PI/2;
+  const endAngle=startAngle+(Math.PI*2*(pct/100));
+  const grad=ctx.createLinearGradient(cx-r,cy,cx+r,cy);
+  if(done){grad.addColorStop(0,'#22c98a');grad.addColorStop(1,'#4aeab0');}
+  else{grad.addColorStop(0,'#3b9eff');grad.addColorStop(1,'#7bc8ff');}
+  ctx.strokeStyle=grad;
+  ctx.lineCap='round';
+  ctx.lineWidth=ringW;
+  ctx.beginPath(); ctx.arc(cx,cy,r,startAngle,endAngle); ctx.stroke();
+
+  // Center text in ring
+  ctx.textAlign='center';
+  ctx.fillStyle=done?'#22c98a':'#3b9eff';
+  ctx.font='700 100px -apple-system,system-ui,sans-serif';
+  ctx.fillText(pct+'%', cx, cy+20);
+  ctx.fillStyle='rgba(240,244,255,0.5)';
+  ctx.font='34px -apple-system,system-ui,sans-serif';
+  ctx.fillText('de meta', cx, cy+68);
+
+  // Stats row
+  const stats=[
+    {val:total>=1000?(total/1000).toFixed(1)+' L':total+' ml', lbl:'tomados'},
+    {val:p.goal>=1000?(p.goal/1000).toFixed(1)+' L':p.goal+' ml', lbl:'meta'},
+    {val:streak+' día'+(streak!==1?'s':''), lbl:'racha'},
+  ];
+  const statW=280, statH=130, statY=670, statGap=30;
+  const totalStatW=stats.length*statW+(stats.length-1)*statGap;
+  const startX=(W-totalStatW)/2;
+  stats.forEach((s,i)=>{
+    const sx=startX+i*(statW+statGap);
+    ctx.fillStyle='#111827';
+    roundRect(ctx,sx,statY,statW,statH,16);
+    ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.07)';
+    ctx.lineWidth=1;
+    ctx.stroke();
+    ctx.fillStyle=done?'#22c98a':'#3b9eff';
+    ctx.font='700 42px -apple-system,system-ui,sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText(s.val, sx+statW/2, statY+58);
+    ctx.fillStyle='rgba(240,244,255,0.4)';
+    ctx.font='26px -apple-system,system-ui,sans-serif';
+    ctx.fillText(s.lbl, sx+statW/2, statY+98);
+  });
+
+  // (no footer, no motivational line)
+
+  // Share or download
+  canvas.toBlob(async blob=>{
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[new File([blob],'agua.png',{type:'image/png'})]})){
+      try{
+        await navigator.share({
+          files:[new File([blob],'mi-hidratacion.png',{type:'image/png'})],
+          title:`Mi hidratación de hoy — ${pct}%`,
+          text:`${p.name} tomó ${total.toLocaleString('es')} ml hoy — ${pct}% de su meta 💧`
+        });
+      }catch(e){if(e.name!=='AbortError') downloadCanvas(blob);}
+    } else {
+      downloadCanvas(blob);
+    }
+  },'image/png');
+}
+
+function downloadCanvas(blob){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='mi-hidratacion-hoy.png'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y); ctx.arcTo(x+w,y,x+w,y+r,r);
+  ctx.lineTo(x+w,y+h-r); ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx.lineTo(x+r,y+h); ctx.arcTo(x,y+h,x,y+h-r,r);
+  ctx.lineTo(x,y+r); ctx.arcTo(x,y,x+r,y,r);
+  ctx.closePath();
+}
+
+// ═══════════════════════════════════════════════
 //  VIEW SWITCHING
 // ═══════════════════════════════════════════════
-function switchView(view, btn){
+function switchView(view,btn){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('view-'+view).classList.add('active');
@@ -777,32 +1021,29 @@ function switchView(view, btn){
 //  SETTINGS
 // ═══════════════════════════════════════════════
 function openSettings(){
-  const p = getProfile()||{};
-  document.getElementById('set-name-val').textContent = p.name||'—';
-  document.getElementById('set-goal').value = p.goal||2700;
-  document.getElementById('set-bottle').value = p.bottleMl||900;
+  const p=getProfile()||{};
+  document.getElementById('set-name-val').textContent=p.name||'—';
+  document.getElementById('set-goal').value=p.goal||2700;
+  document.getElementById('set-bottle').value=p.bottleMl||900;
   document.getElementById('settings-sheet').classList.add('show');
 }
-
 function saveSettings(){
-  const p = getProfile()||{};
-  p.goal = Math.max(500, parseInt(document.getElementById('set-goal').value)||2700);
-  p.bottleMl = Math.max(50, parseInt(document.getElementById('set-bottle').value)||900);
+  const p=getProfile()||{};
+  p.goal=Math.max(500,parseInt(document.getElementById('set-goal').value)||2700);
+  p.bottleMl=Math.max(50,parseInt(document.getElementById('set-bottle').value)||900);
   saveProfile(p);
-  document.getElementById('btn-main-label').textContent = `Tomé una botella — ${p.bottleMl} ml`;
+  document.getElementById('btn-main-label').textContent=`Tomé una botella — ${p.bottleMl} ml`;
   document.getElementById('settings-sheet').classList.remove('show');
-  celebrationShown = false;
+  celebrationShown=false;
   render();
+  updateGreeting();
 }
-
 function resetAll(){
   if(!confirm('¿Segura? Esto borra todo tu historial y perfil.')) return;
-  localStorage.clear();
-  location.reload();
+  localStorage.clear(); location.reload();
 }
-
-document.getElementById('settings-sheet').addEventListener('click', function(e){
-  if(e.target === this) this.classList.remove('show');
+document.getElementById('settings-sheet').addEventListener('click',function(e){
+  if(e.target===this) this.classList.remove('show');
 });
 </script>
 </body>
