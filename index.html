@@ -10,6 +10,7 @@
   <meta name="theme-color" content="#0a0f1e">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%230a0f1e'/%3E%3Cg transform='translate(256,256)'%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='%233b9eff' opacity='.2'/%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='none' stroke='%233b9eff' stroke-width='18'/%3E%3Crect x='-38' y='-140' width='76' height='30' rx='8' fill='%233b9eff' opacity='.6'/%3E%3Crect x='-24' y='-170' width='48' height='36' rx='8' fill='%233b9eff' opacity='.4'/%3E%3Cpath d='M-105,60 Q-105,140 0,140 Q105,140 105,60' fill='%233b9eff' opacity='.45'/%3E%3Ccircle cx='-28' cy='40' r='10' fill='%23ffffff' opacity='.4'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%230a0f1e'/%3E%3Cg transform='translate(256,256)'%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='%233b9eff' opacity='.2'/%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='none' stroke='%233b9eff' stroke-width='18'/%3E%3Crect x='-38' y='-140' width='76' height='30' rx='8' fill='%233b9eff' opacity='.6'/%3E%3Crect x='-24' y='-170' width='48' height='36' rx='8' fill='%233b9eff' opacity='.4'/%3E%3Cpath d='M-105,60 Q-105,140 0,140 Q105,140 105,60' fill='%233b9eff' opacity='.45'/%3E%3Ccircle cx='-28' cy='40' r='10' fill='%23ffffff' opacity='.4'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.json">
   <title>Agua 💧</title>
   <style>
     :root{
@@ -185,6 +186,9 @@
     .btn-sheet-primary{width:100%;background:var(--blue);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:600;padding:14px;cursor:pointer;min-height:48px}
     .btn-sheet-secondary{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;padding:13px;cursor:pointer;min-height:48px}
     .btn-reset{width:100%;background:transparent;border:1px solid rgba(255,80,80,.3);border-radius:var(--radius-sm);color:#ff6b6b;font-size:14px;padding:12px;cursor:pointer;min-height:44px}
+    .btn-toggle{background:var(--surface2);border:1px solid var(--border);border-radius:99px;color:var(--muted);font-size:13px;padding:8px 16px;cursor:pointer;min-height:36px;white-space:nowrap}
+    .btn-toggle.on{background:var(--green-dim);border-color:rgba(34,201,138,.4);color:var(--green)}
+    .notif-note{font-size:12px;color:var(--hint);line-height:1.5;background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px;margin-top:10px}
 
     /* ── SHARE CARD (off-screen canvas) ── */
     #share-canvas-wrap{position:fixed;left:-9999px;top:0;pointer-events:none}
@@ -196,7 +200,7 @@
 <div id="onboarding">
   <div class="ob-wrap">
     <div class="ob-step active" id="ob-step-0">
-      <div class="ob-dots"><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
+      <div class="ob-dots"><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
       <div class="ob-eyebrow">Bienvenida</div>
       <div class="ob-title">Tu tracker de hidratación personalizado</div>
       <div class="ob-sub">En 3 pasos calculamos cuánta agua necesitás exactamente, según tu cuerpo.</div>
@@ -210,7 +214,7 @@
     </div>
 
     <div class="ob-step" id="ob-step-1">
-      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
+      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
       <div class="ob-eyebrow">Tu cuerpo</div>
       <div class="ob-title">Datos para calcular tu meta</div>
       <div class="ob-sub">Usamos una estimación basada en 35 ml/kg ajustada por sexo y actividad física.</div>
@@ -246,7 +250,7 @@
     </div>
 
     <div class="ob-step" id="ob-step-2">
-      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div></div>
+      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
       <div class="ob-eyebrow">Tu meta calculada</div>
       <div class="ob-title">¡Perfecto, <span class="ob-name-display" id="ob-name-show"></span>!</div>
       <div class="ob-result">
@@ -261,7 +265,7 @@
     </div>
 
     <div class="ob-step" id="ob-step-3">
-      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div></div>
+      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div></div>
       <div class="ob-eyebrow">Tu recipiente</div>
       <div class="ob-title">¿Qué usás para tomar agua?</div>
       <div class="ob-sub">El botón principal registrará esta cantidad.</div>
@@ -286,7 +290,21 @@
       <div class="custom-bottle-row" id="custom-bottle-inp" style="display:none">
         <input type="number" id="ob-custom-ml" placeholder="Cantidad en ml" min="50" max="3000" inputmode="decimal">
       </div>
-      <button class="btn-ob" onclick="finishOnboarding()">¡Empezar! 💧</button>
+      <button class="btn-ob" onclick="goToStep(4)">Continuar →</button>
+    </div>
+
+    <div class="ob-step" id="ob-step-4">
+      <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div></div>
+      <div class="ob-eyebrow">Recordatorios</div>
+      <div class="ob-title">¿Querés que te avise?</div>
+      <div class="ob-sub">Te mandamos un recordatorio si pasa más de una hora sin registrar agua y todavía no llegaste a tu meta — solo entre 9am y 8pm.</div>
+      <div class="ob-fields">
+        <div class="ob-field" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px">
+          <label style="margin-bottom:0;color:var(--muted);line-height:1.5">⚠️ Funciona mejor con la app instalada en tu pantalla de inicio y abierta de vez en cuando. Sin un servidor dedicado, el navegador no garantiza avisos puntuales con la app completamente cerrada.</label>
+        </div>
+      </div>
+      <button class="btn-ob" onclick="finishOnboarding(true)">Activar recordatorios 🔔</button>
+      <button class="btn-ob-ghost" onclick="finishOnboarding(false)">Ahora no, gracias</button>
     </div>
   </div>
 </div>
@@ -425,6 +443,13 @@
       <div><div class="setting-lbl">Botella principal</div><div class="setting-sub">ml del botón grande</div></div>
       <input class="setting-input" type="number" id="set-bottle" min="50" max="3000" step="50">
     </div>
+    <div class="setting-row">
+      <div><div class="setting-lbl">Recordatorios</div><div class="setting-sub" id="notif-status-sub">9am–8pm si no registraste</div></div>
+      <button class="btn-toggle" id="btn-notif-toggle" onclick="toggleNotifications()">Activar</button>
+    </div>
+    <div class="notif-note" id="notif-note" style="display:none">
+      Las notificaciones funcionan mejor con la app abierta o recién minimizada. Con la app totalmente cerrada, Chrome decide cuándo revisar — puede tardar varias horas en lugar de exactamente cada hora.
+    </div>
     <div class="sheet-actions">
       <button class="btn-sheet-primary" onclick="saveSettings()">Guardar cambios</button>
       <button class="btn-sheet-secondary" onclick="exportData()">⬇ Exportar historial (JSON)</button>
@@ -561,7 +586,7 @@ function obNext(step){
 function obBack(step){goToStep(step-1)}
 function goToStep(n){document.querySelectorAll('.ob-step').forEach((s,i)=>s.classList.toggle('active',i===n))}
 
-function finishOnboarding(){
+function finishOnboarding(wantNotif){
   if(obBottleMl==='custom'){
     const cm=parseInt(document.getElementById('ob-custom-ml').value);
     if(!cm||cm<50){document.getElementById('ob-custom-ml').focus();return;}
@@ -574,6 +599,11 @@ function finishOnboarding(){
   const goal=calcGoal(w,h,obSex||'F',act);
   saveProfile({name,weight:w,height:h,sex:obSex,activity:act,goal,bottleMl:obBottleMl});
   startApp();
+  if(wantNotif){
+    // Pedimos el permiso recién después de mostrar la app, para no
+    // bloquear el primer render con el diálogo nativo del navegador
+    setTimeout(()=>toggleNotifications(),400);
+  }
 }
 
 // ═══════════════════════════════════════════════
@@ -588,6 +618,7 @@ function startApp(){
   document.getElementById('btn-main-label').textContent=`Tomé una botella — ${p.bottleMl||900} ml`;
   render();
   updateGreeting();
+  initReminders();
 }
 
 window.addEventListener('load',()=>{
@@ -596,8 +627,177 @@ window.addEventListener('load',()=>{
 });
 
 // ═══════════════════════════════════════════════
-//  ACTIONS
+//  RECORDATORIOS — sin servidor push, mejor esfuerzo
 // ═══════════════════════════════════════════════
+//
+// Tres capas, de más a menos confiable:
+// 1. Mientras la pestaña/PWA está abierta: chequeo cada hora en punto
+//    con setInterval — esta es la vía PRECISA.
+// 2. Periodic Background Sync (Chrome/Android): el navegador puede
+//    despertar el service worker para chequear, pero decide el intervalo
+//    real (no garantiza exactamente cada hora; puede ser cada varias horas
+//    según uso de batería y de la app).
+// 3. Al reabrir la app después de estar cerrada: se chequea inmediatamente
+//    si "deberíamos haber avisado" y se notifica si corresponde.
+
+const REM_START_HOUR = 9;   // 9am
+const REM_END_HOUR   = 20;  // 8pm
+const K_NOTIF_ENABLED = 'hydro_notif_enabled';
+const K_LAST_NOTIF    = 'hydro_last_notif_hour'; // 'YYYY-MM-DD-HH' de la última notificación enviada
+
+let swRegistration = null;
+
+function notifEnabled(){ return localStorage.getItem(K_NOTIF_ENABLED) === '1' }
+function setNotifEnabled(v){ localStorage.setItem(K_NOTIF_ENABLED, v ? '1':'0') }
+
+async function initReminders(){
+  if(!('serviceWorker' in navigator)) return;
+
+  try{
+    swRegistration = await navigator.serviceWorker.register('./service-worker.js');
+  }catch(e){ console.warn('Service worker no se pudo registrar:', e); }
+
+  // Escuchar mensajes del SW (cuando se despierta por periodic sync sin
+  // contexto de ventana, o cuando pide que chequeemos)
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    if(event.data && event.data.type === 'CHECK_REMINDER'){
+      checkReminderNow(true);
+    }
+  });
+
+  updateNotifToggleUI();
+
+  if(notifEnabled() && Notification.permission === 'granted'){
+    startHourlyCheck();
+    registerPeriodicSync();
+  }
+
+  // Chequeo inmediato al abrir/reabrir la app — cubre el caso de que
+  // estuvo cerrada y se reabre dentro de la ventana horaria
+  if(notifEnabled() && Notification.permission === 'granted'){
+    checkReminderNow(false);
+  }
+}
+
+let hourlyTimer = null;
+
+function startHourlyCheck(){
+  if(hourlyTimer) clearInterval(hourlyTimer);
+  // Chequea cada 5 min; solo actúa una vez por hora (vía K_LAST_NOTIF)
+  // así detecta el cambio de hora con precisión mientras la app está abierta
+  hourlyTimer = setInterval(()=>checkReminderNow(false), 5*60*1000);
+}
+
+async function registerPeriodicSync(){
+  if(!swRegistration || !('periodicSync' in swRegistration)) return;
+  try{
+    const status = await navigator.permissions.query({name:'periodic-background-sync'});
+    if(status.state === 'granted'){
+      await swRegistration.periodicSync.register('water-reminder-check', {
+        minInterval: 60*60*1000 // pedimos cada hora; Chrome ajusta el real
+      });
+    }
+  }catch(e){
+    console.warn('Periodic Background Sync no disponible:', e);
+  }
+}
+
+function currentHourKey(){
+  const d=new Date();
+  return `${d.toISOString().split('T')[0]}-${d.getHours()}`;
+}
+
+function checkReminderNow(fromSW){
+  const hour = new Date().getHours();
+  if(hour < REM_START_HOUR || hour >= REM_END_HOUR) return;
+
+  const hourKey = currentHourKey();
+  if(localStorage.getItem(K_LAST_NOTIF) === hourKey) return; // ya avisamos esta hora
+
+  const p = getProfile();
+  if(!p) return;
+  const total = todayEntries().reduce((s,e)=>s+e.ml,0);
+  if(total >= p.goal) return; // ya cumplió, no molestar
+
+  localStorage.setItem(K_LAST_NOTIF, hourKey);
+  fireNotification(p, total);
+}
+
+function fireNotification(p, total){
+  const remaining = Math.max(0, p.goal - total);
+  const title = '💧 Hora de hidratarte';
+  const body = total === 0
+    ? `${p.name}, todavía no registraste agua hoy.`
+    : `${p.name}, llevás ${total.toLocaleString('es')} ml. Faltan ${remaining.toLocaleString('es')} ml para tu meta.`;
+
+  if(swRegistration){
+    swRegistration.showNotification(title, {
+      body,
+      icon: PWA_ICON,
+      badge: PWA_ICON,
+      tag: 'water-reminder',
+      renotify: true,
+      vibrate: [200,100,200],
+    });
+  } else if(Notification.permission === 'granted'){
+    new Notification(title, { body, icon: PWA_ICON });
+  }
+}
+
+const PWA_ICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%230a0f1e'/%3E%3Cg transform='translate(256,256)'%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='%233b9eff' opacity='.2'/%3E%3Cellipse cx='0' cy='60' rx='105' ry='80' fill='none' stroke='%233b9eff' stroke-width='18'/%3E%3Crect x='-38' y='-140' width='76' height='30' rx='8' fill='%233b9eff' opacity='.6'/%3E%3Crect x='-24' y='-170' width='48' height='36' rx='8' fill='%233b9eff' opacity='.4'/%3E%3Cpath d='M-105,60 Q-105,140 0,140 Q105,140 105,60' fill='%233b9eff' opacity='.45'/%3E%3Ccircle cx='-28' cy='40' r='10' fill='%23ffffff' opacity='.4'/%3E%3C/g%3E%3C/svg%3E";
+
+async function toggleNotifications(){
+  if(notifEnabled()){
+    setNotifEnabled(false);
+    if(hourlyTimer) clearInterval(hourlyTimer);
+    if(swRegistration && swRegistration.periodicSync){
+      try{ await swRegistration.periodicSync.unregister('water-reminder-check'); }catch(e){}
+    }
+    updateNotifToggleUI();
+    return;
+  }
+
+  if(!('Notification' in window)){
+    alert('Tu navegador no soporta notificaciones.');
+    return;
+  }
+
+  let perm = Notification.permission;
+  if(perm !== 'granted'){
+    perm = await Notification.requestPermission();
+  }
+  if(perm !== 'granted'){
+    alert('Sin permiso de notificaciones no podemos avisarte. Podés habilitarlo desde los ajustes del navegador.');
+    updateNotifToggleUI();
+    return;
+  }
+
+  setNotifEnabled(true);
+  startHourlyCheck();
+  await registerPeriodicSync();
+  updateNotifToggleUI();
+
+  // Notificación de confirmación
+  if(swRegistration){
+    swRegistration.showNotification('💧 Recordatorios activados', {
+      body: `Te avisaremos entre ${REM_START_HOUR}am y ${REM_END_HOUR-12}pm si no registrás agua.`,
+      icon: PWA_ICON,
+      tag: 'water-reminder-setup',
+    });
+  }
+}
+
+function updateNotifToggleUI(){
+  const btn = document.getElementById('btn-notif-toggle');
+  const note = document.getElementById('notif-note');
+  if(!btn) return;
+  const on = notifEnabled() && (typeof Notification !== 'undefined' && Notification.permission === 'granted');
+  btn.textContent = on ? 'Activado ✓' : 'Activar';
+  btn.classList.toggle('on', on);
+  if(note) note.style.display = on ? 'block' : 'none';
+}
+
+
 function addBottle(){
   const p=getProfile();
   addWater(p?p.bottleMl:900);
