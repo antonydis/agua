@@ -211,6 +211,8 @@
         </div>
       </div>
       <button class="btn-ob" onclick="obNext(0)">Continuar →</button>
+      <button class="btn-ob-ghost" onclick="document.getElementById('import-file-input-ob').click()">¿Ya usabas la app? Restaurar desde un backup</button>
+      <input type="file" id="import-file-input-ob" accept="application/json,.json" style="display:none" onchange="importData(event)">
     </div>
 
     <div class="ob-step" id="ob-step-1">
@@ -450,9 +452,12 @@
     <div class="notif-note" id="notif-note" style="display:none">
       Las notificaciones funcionan mejor con la app abierta o recién minimizada. Con la app totalmente cerrada, Chrome decide cuándo revisar — puede tardar varias horas en lugar de exactamente cada hora.
     </div>
+    <button class="btn-sheet-secondary" onclick="testNotification()" style="margin-top:8px">🔔 Probar notificación ahora</button>
     <div class="sheet-actions">
       <button class="btn-sheet-primary" onclick="saveSettings()">Guardar cambios</button>
       <button class="btn-sheet-secondary" onclick="exportData()">⬇ Exportar historial (JSON)</button>
+      <button class="btn-sheet-secondary" onclick="document.getElementById('import-file-input').click()">⬆ Importar historial (JSON)</button>
+      <input type="file" id="import-file-input" accept="application/json,.json" style="display:none" onchange="importData(event)">
       <button class="btn-reset" onclick="resetAll()">Reiniciar todo / cambiar perfil</button>
     </div>
   </div>
@@ -473,7 +478,15 @@ function allData(){ try{return JSON.parse(localStorage.getItem(K_LOG))||{}}catch
 function saveAll(d){ try{localStorage.setItem(K_LOG,JSON.stringify(d))}catch{alert('Almacenamiento lleno. Exportá y limpiá datos viejos.')} }
 function getProfile(){ try{return JSON.parse(localStorage.getItem(K_PROFILE))||null}catch{return null} }
 function saveProfile(p){ localStorage.setItem(K_PROFILE,JSON.stringify(p)) }
-function todayKey(){ return new Date().toISOString().split('T')[0] }
+function todayKey(){
+  return dateKey(new Date());
+}
+function dateKey(d){
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`; // fecha LOCAL del dispositivo, no UTC
+}
 function todayEntries(){ return allData()[todayKey()]||[] }
 function saveToday(e){ const d=allData(); d[todayKey()]=e; saveAll(d) }
 
@@ -653,6 +666,14 @@ function setNotifEnabled(v){ localStorage.setItem(K_NOTIF_ENABLED, v ? '1':'0') 
 async function initReminders(){
   if(!('serviceWorker' in navigator)) return;
 
+  // Limpieza de una vez: una versión anterior calculaba la clave de hora en
+  // UTC en lugar de hora local, lo que pudo guardar un K_LAST_NOTIF que ya
+  // no corresponde a la hora real y bloquea avisos silenciosamente.
+  const storedHourKey = localStorage.getItem(K_LAST_NOTIF);
+  if(storedHourKey && storedHourKey !== currentHourKey()){
+    localStorage.removeItem(K_LAST_NOTIF);
+  }
+
   try{
     swRegistration = await navigator.serviceWorker.register('./service-worker.js');
   }catch(e){ console.warn('Service worker no se pudo registrar:', e); }
@@ -704,7 +725,7 @@ async function registerPeriodicSync(){
 
 function currentHourKey(){
   const d=new Date();
-  return `${d.toISOString().split('T')[0]}-${d.getHours()}`;
+  return `${todayKey()}-${d.getHours()}`;
 }
 
 function checkReminderNow(fromSW){
@@ -797,6 +818,32 @@ function updateNotifToggleUI(){
   if(note) note.style.display = on ? 'block' : 'none';
 }
 
+function testNotification(){
+  if(!('Notification' in window)){
+    alert('Tu navegador no soporta notificaciones.');
+    return;
+  }
+  if(Notification.permission !== 'granted'){
+    alert(`Permiso actual: "${Notification.permission}". Activá los recordatorios primero (botón de arriba) para conceder el permiso.`);
+    return;
+  }
+  const p = getProfile();
+  const total = todayEntries().reduce((s,e)=>s+e.ml,0);
+  const title = '💧 Notificación de prueba';
+  const body = `Si ves esto, las notificaciones funcionan en este navegador. ${p?p.name:''} — ${total} ml hoy.`;
+  if(swRegistration){
+    swRegistration.showNotification(title, { body, icon: PWA_ICON, tag: 'water-test' })
+      .then(()=>console.log('Notificación de prueba enviada vía SW'))
+      .catch(e=>alert('Error al mostrar notificación vía service worker: '+e.message));
+  } else {
+    try{
+      new Notification(title, { body, icon: PWA_ICON });
+    }catch(e){
+      alert('Error al mostrar notificación: '+e.message);
+    }
+  }
+}
+
 
 function addBottle(){
   const p=getProfile();
@@ -885,7 +932,7 @@ function calcStreak(){
   const data=allData(); let streak=0;
   for(let i=0;i<3650;i++){
     const d=new Date(); d.setDate(d.getDate()-i);
-    const k=d.toISOString().split('T')[0];
+    const k=dateKey(d);
     const total=(data[k]||[]).reduce((s,e)=>s+e.ml,0);
     if(total>=goal) streak++;
     else if(i>0) break;
@@ -990,7 +1037,7 @@ function renderHistory(){
   const days=[];
   for(let i=chartDays-1;i>=0;i--){
     const d=new Date(); d.setDate(d.getDate()-i);
-    const k=d.toISOString().split('T')[0];
+    const k=dateKey(d);
     const entries=data[k]||[];
     const total=entries.reduce((s,e)=>s+e.ml,0);
     days.push({k,total,date:d});
@@ -1077,6 +1124,109 @@ function exportData(){
   URL.revokeObjectURL(url);
   document.getElementById('settings-sheet').classList.remove('show');
 }
+
+// ═══════════════════════════════════════════════
+//  IMPORT JSON
+// ═══════════════════════════════════════════════
+function importData(event){
+  const file = event.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e){
+    let parsed;
+    try{
+      parsed = JSON.parse(e.target.result);
+    }catch(err){
+      alert('El archivo no es un JSON válido. Asegurate de elegir el archivo exportado desde esta misma app.');
+      event.target.value='';
+      return;
+    }
+
+    if(!parsed.profile || !parsed.daily_log){
+      alert('Este archivo no tiene el formato esperado (falta "profile" o "daily_log"). ¿Es un export de esta app?');
+      event.target.value='';
+      return;
+    }
+
+    const existingProfile = getProfile();
+    const existingDays = Object.keys(allData()).length;
+    const incomingDays = Object.keys(parsed.daily_log).length;
+
+    let warningMsg = `Vas a importar ${incomingDays} día(s) de historial`;
+    if(parsed.profile.name) warningMsg += ` del perfil "${parsed.profile.name}"`;
+    warningMsg += '.\n\n';
+
+    if(existingProfile || existingDays > 0){
+      warningMsg += `Esto VA A REEMPLAZAR tu perfil actual${existingProfile?` ("${existingProfile.name}")`:''} y los ${existingDays} día(s) que ya tenés guardados en este navegador.\n\n¿Confirmás que querés sobrescribir todo con el archivo importado?`;
+    } else {
+      warningMsg += '¿Confirmás la importación?';
+    }
+
+    if(!confirm(warningMsg)){
+      event.target.value='';
+      return;
+    }
+
+    // Reconstruir perfil
+    const prof = parsed.profile;
+    const newProfile = {
+      name: prof.name || 'Sin nombre',
+      goal: prof.daily_goal_ml || 2700,
+      bottleMl: prof.bottle_ml || 900,
+      sex: prof.sex || null,
+      weight: prof.weight_kg || null,
+      height: prof.height_cm || null,
+      activity: prof.activity || '1.2'
+    };
+    saveProfile(newProfile);
+
+    // Reconstruir historial — el export no guarda 'ts' (timestamp único),
+    // así que lo regeneramos a partir de la fecha del día + hora de texto,
+    // o con un valor sintético creciente si no se puede parsear la hora.
+    const newLog = {};
+    Object.keys(parsed.daily_log).forEach(dayKey=>{
+      const dayData = parsed.daily_log[dayKey];
+      const entries = (dayData.entries || []).map((e, idx)=>{
+        let ts;
+        const parsedTime = parseTimeStringToTs(dayKey, e.time);
+        ts = parsedTime !== null ? parsedTime : (new Date(dayKey+'T12:00:00').getTime() + idx);
+        return { ml: e.ml, time: e.time || '--:--', ts };
+      });
+      newLog[dayKey] = entries;
+    });
+    saveAll(newLog);
+
+    celebrationShown = false;
+    document.getElementById('settings-sheet').classList.remove('show');
+    event.target.value='';
+
+    alert(`¡Listo! Se importaron ${incomingDays} día(s) de historial para "${newProfile.name}".`);
+
+    // Si el onboarding estaba visible (caso "empezar de cero"), saltamos
+    // directo a la app ya con los datos restaurados.
+    startApp();
+  };
+  reader.onerror = function(){
+    alert('No se pudo leer el archivo. Intentá de nuevo.');
+    event.target.value='';
+  };
+  reader.readAsText(file);
+}
+
+// Intenta convertir "14:32" (formato de hora local guardado en el export)
+// más la fecha del día en una marca de tiempo real. Si no puede parsear,
+// devuelve null y el llamador usa un valor sintético.
+function parseTimeStringToTs(dayKey, timeStr){
+  if(!timeStr) return null;
+  const match = timeStr.match(/(\d{1,2}):(\d{2})/);
+  if(!match) return null;
+  const [, hh, mm] = match;
+  const d = new Date(dayKey+'T00:00:00');
+  d.setHours(parseInt(hh), parseInt(mm), 0, 0);
+  return d.getTime();
+}
+
 
 // ═══════════════════════════════════════════════
 //  SHARE — genera imagen con Canvas API
